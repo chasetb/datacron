@@ -9,7 +9,7 @@
     </div>
     <div class="row">
         <div class="col-sm-12 col-lg-6 offset-lg-3 text-center">
-            <form class="mx-4 px-4" action="/" method="post">
+            <form action="/" method="post">
                 <div class="form-group">
                     <label for="search_term"></label>
                     <input class="form-control form-control-lg" name="search_term" id="search_term"
@@ -26,11 +26,10 @@
             <div class="col-sm-12 col-lg-6 offset-lg-3">
                 {% if context.found %}
                     {% if context.multiples %}
-                        <div class="card border-dark mb-3">
-                            <div class="card-body text-info">
-                                <h5 class="card-title">The Datacron found {{ context.multiples_count }} Star Wars
-                                    characters matching &quot;<b>{{ context.name }}</b>&quot;.</h5>
-                                <p>Please select a matching character:</p>
+                        <div class="card border-info mb-3">
+                            <div class="card-body">
+                                <h3 class="card-title text-info">{{ context.multiples_count }} Star Wars characters found matching
+                                &quot;<b>{{ context.name }}</b>&quot;</h3>
                                 <div class="text-left">
                                     <ul>
                                         {% for r in range(0, context.multiples_count) %}
@@ -43,39 +42,40 @@
                             </div>
                         </div>
                     {% else %}
-                        <div class="hr-sect">Results</div>
-                        <br>
-                        <h1 class="pb-3">{{ context.name }}</h1>
-                        <div class="table-responsive text-center">
-                            <table class="table">
-                                <thead class="thead-light">
-                                <tr>
-                                    <th>Homeworld</th>
-                                    <th>Population</th>
-                                    <th>Climate</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>{{ context.homeworld_name|title }}</td>
-                                    <td>{{ context.homeworld_population }}</td>
-                                    <td>{{ context.homeworld_climate|title }}</td>
-                                </tr>
-                                </tbody>
-                            </table>
+                        <div class="card border-dark mb-3">
+                            <div class="card-body">
+                                <h3 class="card-title">{{ context.name }}</h3>
+                                <div class="table-responsive text-center">
+                                    <table class="table">
+                                        <thead class="thead-light">
+                                        <tr>
+                                            <th>Homeworld</th>
+                                            <th>Population</th>
+                                            <th>Climate</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>{{ context.homeworld_name|title }}</td>
+                                            <td>{{ context.homeworld_population }}</td>
+                                            <td>{{ context.homeworld_climate|title }}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     {% endif %}
                 {% else %}
                     <div class="card border-danger mb-3">
                         <div class="card-body text-danger">
-                            <h5 class="card-title">The Datacron did not find any Star Wars characters matching
-                                &quot;<b>{{ context.name }}</b>&quot;.</h5>
+                            <h3 class="card-title">No Star Wars characters found matching &quot;<b>{{ context.name }}</b>&quot;</h3>
                             <div class="text-left">
                                 <ul>
                                     <li>Make sure all words are spelled correctly.</li>
                                     <li>Try fewer keywords.</li>
                                     <li>Try different keywords.</li>
-                                    <li>Try more general keywords.</li>
+                                    <li>Try more general keywords. Parts of a name are fine.</li>
                                 </ul>
                             </div>
                         </div>
