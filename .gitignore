@@ -123,5 +123,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# MacOS files
+.DS_Store
+
 # Zappa settings file
 zappa_settings.json
