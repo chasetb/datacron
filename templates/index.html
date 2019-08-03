@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col text-center">
+            <i class="fas fa-cube fa-5x"></i>
+            <h2>Datacron</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-lg-6 offset-lg-3 text-center">
+            <form class="mx-4 px-4" action="/" method="post">
+                <div class="form-group">
+                    <label for="search_term"></label>
+                    <input class="form-control form-control-lg" name="search_term" id="search_term"
+                           placeholder="Enter {% if context.search %}another name{% else %}character name{% endif %}"
+                           required>
+                </div>
+                <button type="submit" class="btn btn-outline-primary btn-lg">Search</button>
+            </form>
+        </div>
+    </div>
+
+    {% if context.search %}
+        <div class="row my-4 py-4">
+            <div class="col-sm-12 col-lg-6 offset-lg-3">
+                {% if context.found %}
+                    {% if context.multiples %}
+                        <div class="card border-dark mb-3">
+                            <div class="card-body text-info">
+                                <h5 class="card-title">The Datacron found {{ context.multiples_count }} Star Wars
+                                    characters matching &quot;<b>{{ context.name }}</b>&quot;.</h5>
+                                <p>Please select a matching character:</p>
+                                <div class="text-left">
+                                    <ul>
+                                        {% for r in range(0, context.multiples_count) %}
+                                            <li>
+                                                <a href="/?search_term={{ context.multiples[r] }}">{{ context.multiples[r] }}</a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="hr-sect">Results</div>
+                        <br>
+                        <h1 class="pb-3">{{ context.name }}</h1>
+                        <div class="table-responsive text-center">
+                            <table class="table">
+                                <thead class="thead-light">
+                                <tr>
+                                    <th>Homeworld</th>
+                                    <th>Population</th>
+                                    <th>Climate</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>{{ context.homeworld_name|title }}</td>
+                                    <td>{{ context.homeworld_population }}</td>
+                                    <td>{{ context.homeworld_climate|title }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    {% endif %}
+                {% else %}
+                    <div class="card border-danger mb-3">
+                        <div class="card-body text-danger">
+                            <h5 class="card-title">The Datacron did not find any Star Wars characters matching
+                                &quot;<b>{{ context.name }}</b>&quot;.</h5>
+                            <div class="text-left">
+                                <ul>
+                                    <li>Make sure all words are spelled correctly.</li>
+                                    <li>Try fewer keywords.</li>
+                                    <li>Try different keywords.</li>
+                                    <li>Try more general keywords.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block javascript_page %}{% endblock %}
