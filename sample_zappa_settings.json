@@ -1,0 +1,9 @@
+{
+    "dev": {
+        "app_function": "app.app.app",
+        "aws_region": "us-west-2",
+        "project_name": "datacron",
+        "runtime": "python3.7",
+        "s3_bucket": "<INSERT BUCKET NAME>"
+    }
+}
